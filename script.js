@@ -1,28 +1,48 @@
+// HTML
 const html = document.querySelector('html');
 
-//botoes
+// Botões
 const focoBt = document.querySelector('.app__card-button--foco');
 const longoBt = document.querySelector('.app__card-button--longo');
 const curtoBt = document.querySelector('.app__card-button--curto');
+const titulo = document.querySelector('.app__title');
 
-//imagens
-const banner = document.querySelector('.app__image')
+// Imagens
+const banner = document.querySelector('.app__image');
 
-//foco
+// Foco
 focoBt.addEventListener('click', () => {
-    html.setAttribute('data-contexto', 'foco')
-    banner.setAttribute('src', '/imagens/foco.png')
+    alterarContexto('foco');
 })
 
-// break curto
+// Break curto
 curtoBt.addEventListener('click', () => {
-    html.setAttribute('data-contexto', 'descanso-curto')
-    banner.setAttribute('src','/imagens/descanso-curto.png')
+    alterarContexto('descanso-curto');
 })
 
-//break longo
+// Break longo
 longoBt.addEventListener('click', () => {
-    html.setAttribute('data-contexto', 'descanso-longo')
-    banner.setAttribute('src', '/imagens/descanso-longo.png')
-    //window.location.href = "https://sgeprodweb.sistemafiergs.com.br/FrameHTML/web/app/edu/PortalEducacional/login/"
+    alterarContexto('descanso-longo');
 })
+
+function alterarContexto(contexto) {
+    html.setAttribute('data-contexto', contexto);
+    banner.setAttribute('src',`/imagens/${contexto}.png`);
+    switch (contexto) {
+        case 'foco':
+            titulo.innerHTML = `Otimize sua produtividade,<br><strong class="app__title-strong">mergulhe no que importa.</strong>`
+        break;
+
+        case 'descanso-curto':
+            titulo.innerHTML = `Que tal da uma respirada?<br><strong class="app__title-strong">Faça uma pausa curta!</strong>`
+        break;
+
+        case 'descanso-longo':
+            titulo.innerHTML = `Hora de voltar à superficie.<br><strong class="app__title-strong">Faça uma pausa longa!</strong>`
+
+        default:
+            break;
+    }
+}
+
+
