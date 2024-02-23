@@ -7,6 +7,10 @@ const longoBt = document.querySelector('.app__card-button--longo');
 const curtoBt = document.querySelector('.app__card-button--curto');
 const titulo = document.querySelector('.app__title');
 const botoes = document.querySelectorAll('.app__card-button');
+const startPauseBt = document.querySelector('#start-pause');
+
+let tempoDecorrido = 5;
+let intervaloId = null;
 
 // Imagens
 const banner = document.querySelector('.app__image');
@@ -69,4 +73,28 @@ function alterarContexto(contexto) {
     }
 }
 
+const contagemRegressiva = () => {
+    if(tempoDecorrido <= 0) {
+        zerar();
+        alert("Tempo esgotado!")
+        return
+    }
+    tempoDecorrido -= 1;
+    console.log('Temporizador: ' + tempoDecorrido); 
+}
+
+startPauseBt.addEventListener('click', iniciarPausar)
+
+function iniciarPausar() {
+    if (intervaloId) {
+        zerar()
+        return;
+    }
+    intervaloId = setInterval(contagemRegressiva, 1000)
+}
+
+function zerar() {
+    clearInterval(intervaloId);
+    intervaloId = null;
+}
 
